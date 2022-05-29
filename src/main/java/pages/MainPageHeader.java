@@ -1,6 +1,7 @@
 package pages;
 
 import com.thoughtworks.selenium.Selenium;
+import driver.DriverConfigurator;
 import enums.MenuItems;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -36,8 +37,9 @@ public class MainPageHeader {
         getHeaderMenuItem(item).click();
     }
 
-    public void openProfilePage(){
+    public ProfilePage openProfilePage(){
         clickHeaderMenuItem(MenuItems.PROFILE.getName());
+        return new ProfilePage(driver).waitUntilLoaded();
     }
 
     public void openCartPage(){

@@ -1,3 +1,4 @@
+import driver.DriverConfigurator;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,15 +13,12 @@ public class BaseTest {
 
     @BeforeTest
     public void setup(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.manage().window().maximize();
+        driver = new DriverConfigurator().setupDriver();
         driver.get("https://kasta.ua/uk/");
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeDriver(){
-        driver.quit();
+        driver.close();
     }
 }
