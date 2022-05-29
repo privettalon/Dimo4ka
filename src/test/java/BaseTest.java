@@ -16,10 +16,8 @@ public class BaseTest {
         driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
-        driver.get("http://www.google.com");
+        driver.get("https://kasta.ua/uk/");
     }
-
-
 
     @AfterMethod
     public void closeDriver(){
