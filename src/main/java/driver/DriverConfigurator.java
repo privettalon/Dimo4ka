@@ -4,13 +4,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.function.Supplier;
 
 public class DriverConfigurator {
     protected WebDriver webDriver;
@@ -20,9 +19,8 @@ public class DriverConfigurator {
     public WebDriver setupDriver(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
         webDriver.manage().window().maximize();
-        webDriverWait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT_TO_WAIT);
+//        webDriverWait = getWebDriverWait(webDriver);
         return webDriver;
     }
 
@@ -30,8 +28,8 @@ public class DriverConfigurator {
         return webDriver;
     }
 
-    public WebDriverWait getWebDriverWait() {
-        return (WebDriverWait) webDriverWait
+    public WebDriverWait getWebDriverWait(WebDriver webDriver) {
+        return (WebDriverWait) new WebDriverWait(webDriver, DEFAULT_TIMEOUT_TO_WAIT)
                 .pollingEvery(Duration.ofMillis(500))
                 .withTimeout(Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT))
                 .ignoring(NoSuchElementException.class)

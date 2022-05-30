@@ -1,4 +1,4 @@
-package pages;
+package pageobjects;
 
 import driver.DriverConfigurator;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -10,7 +10,7 @@ public class AbstractPage {
     WebDriverWait webDriverWait;
 
     public AbstractPage() {
-        webDriverWait = new DriverConfigurator().getWebDriverWait();
+       // webDriverWait = new DriverConfigurator().getWebDriverWait();
     }
 
     public void waitUntil(Supplier<Boolean> condition) {

@@ -1,6 +1,6 @@
 package datamodels;
 
-import pages.UserDataFaker;
+import fakers.UserDataFaker;
 
 public class UserDataModelConstructor {
     public static UserDataModel.UserDataModelBuilder getRegistrationData(){

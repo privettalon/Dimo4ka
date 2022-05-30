@@ -1,10 +1,10 @@
 import org.testng.annotations.Test;
-import pages.MainPage;
+import pageobjects.MainPage;
 
 public class LoginTest extends BaseTest {
 
     @Test
     public void test1(){
-        new MainPage(driver).getMainPageHeader().openProfilePage();
+        new MainPage(driver).openProfilePage();
     }
 }
