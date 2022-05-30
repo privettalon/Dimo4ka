@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 
 public class DriverConfigurator {
     protected WebDriver webDriver;
+    protected WebDriverWait webDriverWait;
     protected static final long DEFAULT_TIMEOUT_TO_WAIT = 40;
 
     public WebDriver setupDriver(){
@@ -21,6 +22,7 @@ public class DriverConfigurator {
         webDriver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(webDriver, 10);
         webDriver.manage().window().maximize();
+        webDriverWait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT_TO_WAIT);
         return webDriver;
     }
 
@@ -29,7 +31,7 @@ public class DriverConfigurator {
     }
 
     public WebDriverWait getWebDriverWait() {
-        return (WebDriverWait) new WebDriverWait(webDriver, DEFAULT_TIMEOUT_TO_WAIT)
+        return (WebDriverWait) webDriverWait
                 .pollingEvery(Duration.ofMillis(500))
                 .withTimeout(Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT))
                 .ignoring(NoSuchElementException.class)
