@@ -2,6 +2,7 @@ package pageobjects;
 
 import enums.MenuItems;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
 
@@ -10,6 +11,7 @@ public class MainPage {
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this); // this initializes @FindBy elements
         this.mainPageHeader = new MainPageHeader(driver);
     }
 

@@ -1,36 +1,45 @@
 package pageobjects;
 
 import driver.DriverConfigurator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ProfilePage {
+public class ProfilePage extends AbstractPage {
     private WebDriver driver;
-    WebDriverWait webDriverWait = new DriverConfigurator().getWebDriverWait(driver);
-    private WebElement popUp = driver.findElement(By.cssSelector(".popup--login"));
+
+    @FindBy(css = ".popup--login")
+    private WebElement popUp;
+
+    @FindBy(xpath = "//div[.='Вхід / Реєстрація']")
+    private WebElement title;
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this); // this initializes @FindBy elements
     }
 
-    public boolean isProfilePageOpened(){
-        return popUp.isDisplayed();
+    public boolean isTitleVisible(){
+        waitUntil(ExpectedConditions.visibilityOf(title));
+        return title.isDisplayed();
     }
 
+    //для кожної сторінки інший локатор треба вставити
     public ProfilePage waitUntilLoaded(){
         waitUntil(ExpectedConditions.visibilityOf(popUp));
         return this;
     }
 
+    //то теж треба на кожній сторінці юзати, або придумати як то винести в AbstractPage
     public void waitUntil(Function condition) {
-        webDriverWait.until(condition);
+        getWebDriverWait(driver).until(condition);
     }
 }

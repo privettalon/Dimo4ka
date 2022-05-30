@@ -6,22 +6,24 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class MainPageHeader {
     WebDriver driver;
 
     public MainPageHeader(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this); // this initializes @FindBy elements
     }
 
-//    @FindBy(css = ".header-container ")
-//    private WebElement header;
-//
-//    @FindBy(css = "//input[@type='search']")
-//    private WebElement searchInput;
-//
-//    @FindBy(css = ".search__btn")
-//    private WebElement searchButton;
+    @FindBy(css = ".header-container ")
+    private WebElement header;
+
+    @FindBy(css = "//input[@type='search']")
+    private WebElement searchInput;
+
+    @FindBy(css = ".search__btn")
+    private WebElement searchButton;
 
     public WebElement getHeaderMenuItem(String item){
         try{

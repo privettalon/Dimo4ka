@@ -13,27 +13,11 @@ import java.time.Duration;
 
 public class DriverConfigurator {
     protected WebDriver webDriver;
-    protected WebDriverWait webDriverWait;
-    protected static final long DEFAULT_TIMEOUT_TO_WAIT = 40;
 
     public WebDriver setupDriver(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-//        webDriverWait = getWebDriverWait(webDriver);
         return webDriver;
     }
-
-    public WebDriver getWebDriver(){
-        return webDriver;
-    }
-
-    public WebDriverWait getWebDriverWait(WebDriver webDriver) {
-        return (WebDriverWait) new WebDriverWait(webDriver, DEFAULT_TIMEOUT_TO_WAIT)
-                .pollingEvery(Duration.ofMillis(500))
-                .withTimeout(Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class);
-    }
-
 }
