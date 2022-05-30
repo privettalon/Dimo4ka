@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainPageHeader {
+public class MainPageHeader extends AbstractPage{
     WebDriver driver;
 
     public MainPageHeader(WebDriver driver) {
@@ -19,14 +19,14 @@ public class MainPageHeader {
     @FindBy(css = ".header-container ")
     private WebElement header;
 
-    @FindBy(css = "//input[@type='search']")
+    @FindBy(xpath = "//input[@type='search']")
     private WebElement searchInput;
 
     @FindBy(css = ".search__btn")
     private WebElement searchButton;
 
     public WebElement getHeaderMenuItem(String item){
-        try{
+        try {
             return driver.findElement(By.xpath(String.format("//span[.='%s']/ancestor::div[@class='header-menu_item']", item)));
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException(String.format("There is no menu item with name '%s'", item));

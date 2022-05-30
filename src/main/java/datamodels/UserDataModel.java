@@ -8,7 +8,7 @@ import lombok.ToString;
 @Builder
 @Getter
 @EqualsAndHashCode
-@ToString(exclude = {"password"})
+@ToString()
 public class UserDataModel {
     String username;
     String password;

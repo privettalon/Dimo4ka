@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -22,6 +23,9 @@ public class ProfilePage extends AbstractPage {
     @FindBy(xpath = "//div[.='Вхід / Реєстрація']")
     private WebElement title;
 
+    @FindBy(xpath = "//label[.='Email або телефон']/preceding-sibling::input")
+    private WebElement emailInput;
+
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this); // this initializes @FindBy elements
@@ -30,6 +34,11 @@ public class ProfilePage extends AbstractPage {
     public boolean isTitleVisible(){
         waitUntil(ExpectedConditions.visibilityOf(title));
         return title.isDisplayed();
+    }
+
+    public ProfilePage setEmail(String email){
+        emailInput.sendKeys(email);
+        return this;
     }
 
     //для кожної сторінки інший локатор треба вставити
