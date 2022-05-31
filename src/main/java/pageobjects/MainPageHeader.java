@@ -25,9 +25,24 @@ public class MainPageHeader extends AbstractPage{
     @FindBy(css = ".search__btn")
     private WebElement searchButton;
 
+    @FindBy(xpath = "//li[@class = 'menu-vertical__item group ']/descendant::a[text()='Одяг']/parent::li")
+    private WebElement catalogOpenButton;
+
+    @FindBy(xpath = "//div[@class = 'catalog-menu__section']/a[text()='Чоловікам']")
+    private WebElement manCatalogButton;
+
     public WebElement getHeaderMenuItem(String item){
         try {
             return driver.findElement(By.xpath(String.format("//span[.='%s']/ancestor::div[@class='header-menu_item']", item)));
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(String.format("There is no menu item with name '%s'", item));
+        }
+    }
+
+
+    public WebElement getCatalogMenuItem(String item){
+        try {
+            return driver.findElement(By.xpath(String.format("//div[@class = 'catalog-menu__section']/a[text()='%s']", item)));
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException(String.format("There is no menu item with name '%s'", item));
         }
@@ -37,4 +52,11 @@ public class MainPageHeader extends AbstractPage{
         getHeaderMenuItem(item).click();
     }
 
+    public void openCatalogClick(){
+        catalogOpenButton.click();
+    }
+
+    public void openManCatalog(){
+        manCatalogButton.click();
+    }
 }

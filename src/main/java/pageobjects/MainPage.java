@@ -2,6 +2,8 @@ package pageobjects;
 
 import enums.MenuItems;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
@@ -9,6 +11,9 @@ public class MainPage {
     private MainPageHeader mainPageHeader;
     private WebDriver driver;
 
+
+
+    private WebElement searchInput;
     public MainPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this); // this initializes @FindBy elements
@@ -24,4 +29,15 @@ public class MainPage {
         mainPageHeader.clickHeaderMenuItem(MenuItems.CART.getName());
         return new CartPage(driver).waitUntilLoaded();
     }
+
+    public ProductPage openCatalogClick(){
+        mainPageHeader.openCatalogClick();
+        mainPageHeader.openManCatalog();
+        return new ProductPage(driver).waitUntilLoaded();
+    }
+
+
+
+
+
 }
